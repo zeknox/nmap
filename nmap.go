@@ -191,6 +191,13 @@ func WithTargets(targets ...string) func(*Scanner) {
 	}
 }
 
+// WithTargetSlice sets the target of a scanner.
+func WithTargetSlice(targets []string) func(*Scanner) {
+	return func(s *Scanner) {
+		s.args = append(s.args, targets...)
+	}
+}
+
 // WithTargetExclusion sets the excluded targets of a scanner.
 func WithTargetExclusion(target string) func(*Scanner) {
 	return func(s *Scanner) {
@@ -581,6 +588,14 @@ func WithPorts(ports ...string) func(*Scanner) {
 	return func(s *Scanner) {
 		s.args = append(s.args, "-p")
 		s.args = append(s.args, portList)
+	}
+}
+
+// WithPortsSlice sets the ports which the scanner should scan on each host.
+func WithPortsSlice(ports []string) func(*Scanner) {
+	return func(s *Scanner) {
+		s.args = append(s.args, "-p")
+		s.args = append(s.args, ports...)
 	}
 }
 
